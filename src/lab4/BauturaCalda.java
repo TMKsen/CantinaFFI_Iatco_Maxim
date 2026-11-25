@@ -1,7 +1,8 @@
 
 package lab4;
 
-public class BauturaCalda extends Bautura {
+public class BauturaCalda extends Bautura
+        implements Preparabil {
 
     private final int temperatura;
 
@@ -41,5 +42,10 @@ public class BauturaCalda extends Bautura {
     public String toString() {
         return super.toString()
                 + ", temperatura=" + temperatura;
+    }
+    @Override
+    public String modPreparare() {
+        return "Bautura calda se prepara la temperatura de "
+                + temperatura + " grade.";
     }
 }

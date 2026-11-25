@@ -1,7 +1,8 @@
 
 package lab4;
 
-public class Waffle extends Produs {
+public class Waffle extends Produs
+        implements Preparabil, Personalizabil {
 
     private final boolean extraCrocant;
 
@@ -37,5 +38,16 @@ public class Waffle extends Produs {
     public String toString() {
         return super.toString()
                 + ", extraCrocant=" + extraCrocant;
+    }
+    @Override
+    public String modPreparare() {
+        return "Waffle se prepara in aparatul special.";
+    }
+
+    @Override
+    public String optiuniPersonalizare() {
+        return extraCrocant
+                ? "Extra crocant"
+                : "Varianta clasica";
     }
 }

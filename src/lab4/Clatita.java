@@ -1,7 +1,8 @@
 
 package lab4;
 
-public class Clatita extends Produs {
+public class Clatita extends Produs
+        implements Preparabil, Personalizabil {
 
     private final Topping topping;
 
@@ -37,5 +38,14 @@ public class Clatita extends Produs {
     @Override
     public String toString() {
         return super.toString() + ", topping=" + topping;
+    }
+    @Override
+    public String modPreparare() {
+        return "Clatita se prepara pe plita.";
+    }
+
+    @Override
+    public String optiuniPersonalizare() {
+        return "Topping: " + topping;
     }
 }
