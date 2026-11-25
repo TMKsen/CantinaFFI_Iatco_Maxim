@@ -3,7 +3,7 @@ package lab4;
 
 import java.util.Objects;
 
-public abstract class Produs {
+public abstract class Produs implements Comparable<Produs> {
 
     private static int urmatorulId = 1;
 
@@ -11,6 +11,7 @@ public abstract class Produs {
     protected String denumire;
     protected double pret;
     protected int stoc;
+    protected int vandute;
 
     public Produs(String denumire, double pret) {
         this(denumire, pret, 0);
@@ -33,6 +34,7 @@ public abstract class Produs {
         this.denumire = denumire;
         this.pret = pret;
         this.stoc = stoc;
+        this.vandute = 0;
     }
 
     public int getId() {
@@ -51,6 +53,10 @@ public abstract class Produs {
         return stoc;
     }
 
+    public int getVandute() {
+        return vandute;
+    }
+
     public void setPret(double pret) {
         if (pret < 0) {
             throw new IllegalArgumentException("Pretul nu poate fi negativ.");
@@ -59,10 +65,8 @@ public abstract class Produs {
         this.pret = pret;
     }
 
-    // Fiecare subclasa calculeaza propriul pret final.
     public abstract double pretFinal();
 
-    // Fiecare subclasa isi declara categoria.
     public abstract String categorie();
 
     public boolean esteDisponibil(int cantitate) {
@@ -75,12 +79,18 @@ public abstract class Produs {
         }
 
         stoc -= cantitate;
+        vandute += cantitate;
     }
 
     public void refaceStoc(int cantitate) {
         if (cantitate > 0) {
             stoc += cantitate;
         }
+    }
+
+    @Override
+    public int compareTo(Produs altProdus) {
+        return this.denumire.compareToIgnoreCase(altProdus.denumire);
     }
 
     @Override
@@ -110,4 +120,3 @@ public abstract class Produs {
         return Objects.hash(id);
     }
 }
-

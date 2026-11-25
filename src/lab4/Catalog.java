@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
 
 public class Catalog {
 
@@ -65,5 +66,25 @@ public class Catalog {
 
     public List<Produs> getProduse() {
         return Collections.unmodifiableList(produse);
+    }
+
+    public List<Produs> top(int k, Comparator<Produs> comparator) {
+        if (k <= 0) {
+            return new ArrayList<>();
+        }
+
+        if (comparator == null) {
+            throw new IllegalArgumentException("Comparatorul nu poate fi null.");
+        }
+
+        List<Produs> rezultat = new ArrayList<>(produse);
+
+        rezultat.sort(comparator);
+
+        if (k < rezultat.size()) {
+            return new ArrayList<>(rezultat.subList(0, k));
+        }
+
+        return rezultat;
     }
 }
